@@ -6,7 +6,7 @@ import { getAuthenticatedUser } from "@/lib/auth";
 export async function POST(request: NextRequest) {
   try {
     // 1. Check authentication
-    const user = await getAuthenticatedUser();
+    const user = await getAuthenticatedUser("customer");
 
     if (!user) {
       return NextResponse.json(
