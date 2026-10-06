@@ -171,8 +171,7 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: false,
-        message:
-          error instanceof Error ? error.message : "Unknown database error",
+        message: "Failed to fetch products",
       },
       {
         status: 500,
