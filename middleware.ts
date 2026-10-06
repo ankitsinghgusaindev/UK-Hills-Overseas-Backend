@@ -6,6 +6,7 @@ export function middleware(request: NextRequest) {
 
   const allowedOrigins = [
     "http://localhost:5173",
+    "https://uk-hills-overseas-frontend.vercel.app",
     process.env.FRONTEND_URL,
   ].filter(Boolean);
 
