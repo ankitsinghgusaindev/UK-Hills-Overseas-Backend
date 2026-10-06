@@ -4,9 +4,14 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const origin = request.headers.get("origin");
 
+  const allowedOrigins = [
+    "http://localhost:5173",
+    process.env.FRONTEND_URL,
+  ].filter(Boolean);
+
   const response = NextResponse.next();
 
-  if (origin === "http://localhost:5173") {
+  if (origin && allowedOrigins.includes(origin)) {
     response.headers.set("Access-Control-Allow-Origin", origin);
     response.headers.set("Access-Control-Allow-Credentials", "true");
     response.headers.set(
@@ -17,6 +22,7 @@ export function middleware(request: NextRequest) {
       "Access-Control-Allow-Headers",
       "Content-Type, Authorization",
     );
+    response.headers.set("Vary", "Origin");
   }
 
   if (request.method === "OPTIONS") {
